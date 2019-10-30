@@ -1,0 +1,16 @@
+{
+  "name": "project-praynow",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "9.1.1",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
+    "styled-components": "^4.4.0"
+  }
+}
