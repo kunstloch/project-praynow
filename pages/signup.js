@@ -1,6 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
-import Layout from '../components/Layout';
 import styled from 'styled-components';
 
 const Container = styled.form`
@@ -25,33 +23,33 @@ const Input = styled.input`
   background-color: white;
   border-radius: 10px 10px;
   font-size: (1em + 1vw);
+  ::placeholder {
+    font-size: (1em + 1vw);
+    text-align: left;
+    padding-left: 20px;
+  }
 `;
 
-const Submit = styled.input`
+const Submit = styled.button`
   margin: 20px;
   padding: 10px;
   width: 30%;
   text-align: center;
   background-color: #ebebeb;
+  font-size: (1em + 1vw);
 `;
 
 const Signup = () => (
-  <div>
-    <Head>
-      <title>Signup</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-
-    <Layout />
+  <>
     <H2>SIGN-UP</H2>
 
     <Container>
       <Input type="text" placeholder="name" />
       <Input type="email" placeholder="email" />
       <Input type="password" placeholder="password" />
-      <Submit type="submit" value="Submit" />
+      <Submit>Submit</Submit>
     </Container>
-  </div>
+  </>
 );
 
 export default Signup;

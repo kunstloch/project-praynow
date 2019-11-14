@@ -1,5 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+// const HamburgerDiv = styled.div`
+//   width: 35px;
+//   height: 5px;
+//   background-color: black;
+//   margin: 6px 0;
+// `;
 
 const NavBar = () => (
   <nav>

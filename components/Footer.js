@@ -17,9 +17,7 @@ const Container = styled.div`
 export default function Footer() {
   return (
     <Container>
-      <Content>
-        <p>TEST - TEST</p>
-      </Content>
+      <Content>TEST - TEST</Content>
     </Container>
   );
 }

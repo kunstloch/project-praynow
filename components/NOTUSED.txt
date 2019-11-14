@@ -1,0 +1,50 @@
+{userAccount.prayRequest.map((prayRequest, index) => {
+        // const date = prayRequest.createdAt.substring(
+        //   0,
+        //   prayRequest.createdAt.indexOf('T')
+        // );
+
+        return (
+          <GridContainer>
+            <GridItemMeta>DATE</GridItemMeta>
+            <GridItemCat>
+              {/* {prayRequest.prayRequestCategories[0].categoryName} */}
+              Category
+            </GridItemCat>
+            <GridItemTitle>{prayRequest.prayRequestTitel}</GridItemTitle>
+            <GridItemImg>
+              <Img
+                // src={prayRequest.prayRequestImageUrl}
+                // // width="170px"
+                // // height="100px"
+                src="LoginFace.png"
+              />
+            </GridItemImg>
+            {/* <GridItemText>{prayRequest.prayRequestText}</GridItemText> */}
+            Blalala blallalsaa
+            <GridItemAuthor>
+              PrayRequest: {prayRequest.userAccount.userScreenName}
+            </GridItemAuthor>
+            <GridItemPrays>
+              {/* Prays: {prayRequest.prays.length + ' '} */}
+              <button
+                className={hiddenOn === prayRequest.id ? 'hidden' : ''}
+                onClick={() => setHiddenOn(prayRequest.id)}
+              >
+                ▼
+              </button>
+              <button
+                className={hiddenOn === prayRequest.id ? '' : 'hidden'}
+                onClick={() => setHiddenOn(false)}
+              >
+                ▲
+              </button>
+              <div className={hiddenOn === prayRequest.id ? '' : 'hidden'}>
+                {prayRequest.prays.map((prays, index) => (
+                  <div key={index}>{prays.id}</div>
+                ))}
+              </div>
+            </GridItemPrays>
+          </GridContainer>
+        );
+      })}

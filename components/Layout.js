@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import { createGlobalStyle, ThemeProvider, style } from 'styled-components';
+
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
       "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
       sans-serif;
       background-color: #CDCDCD;
@@ -41,17 +42,21 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Layout = props => (
-  <div>
+  <>
     <Head>
       <title>PrayNow</title>
       <link rel="icon" href="/favicon.ico" />
+      <link
+        href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap"
+        rel="stylesheet"
+      ></link>
     </Head>
     <GlobalStyle />
     <Header />
-    <NavBar />
-    <div>{props.children}</div>
-    <Footer />
-  </div>
+
+    {props.children}
+    {/* <Footer /> */}
+  </>
 );
 
 export default Layout;
