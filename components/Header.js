@@ -18,10 +18,20 @@ const HeaderStyled = styled.header`
 `;
 
 const LoginImg = styled.img`
-  height: 50px;
+  width: 45px;
   left: 5px;
   top: 45px;
+
   position: absolute;
+  border-radius: 50%;
+  border: 2px solid black;
+  &:hover,
+  &:focus {
+    top: 42px;
+    width: 50px;
+    left: 2px;
+    border: 3px solid black;
+  }
 `;
 
 const LogoImg = styled.img`
@@ -91,6 +101,8 @@ const Nav = styled.nav`
   bottom: 0;
   background: rgb(255, 225, 0, 0.97);
   border-left: 5px solid black;
+  border-bottom: 5px solid black;
+  border-bottom-left-radius: 25px;
 
   &.hidden {
     display: none;
@@ -105,9 +117,81 @@ const Nav = styled.nav`
   }
 `;
 
+const NavLeft = styled.nav`
+  position: fixed;
+  top: 110px;
+  left: 0;
+  height: 40%;
+  width: 30%;
+
+  bottom: 0;
+  background: rgb(255, 225, 0, 0.97);
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+
+  border-bottom-right-radius: 25px;
+  &.hidden {
+    display: none;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  li {
+    text-decoration: none;
+    list-style-type: none;
+    margin: 30px 0px 5px 5px;
+    font-size: (20px);
+    font-weight: bold;
+  }
+`;
+
+const NavLeftLogin = styled.nav`
+  position: fixed;
+  top: 110px;
+  left: 0;
+  height: 15%;
+  width: 30%;
+  text-align: left;
+
+  bottom: 0;
+  background: rgb(255, 225, 0, 0.97);
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+  border-bottom-right-radius: 25px;
+  &.hidden {
+    display: none;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  li {
+    text-decoration: none;
+    list-style-type: none;
+    margin: 30px 0px 5px 5px;
+    font-size: (20px);
+    font-weight: bold;
+  }
+`;
+
 const NoDeco = styled.a`
   text-decoration: none;
   padding: 10px 10px 15px 10px;
+  margin-bottom: 8px;
+  font-size: 20px;
+
+  &:hover,
+  &:focus {
+    font-size: 24px;
+  }
+`;
+
+const NoDecoLeft = styled.a`
+  text-decoration: none;
+  padding: 10px 10px 15px 0px;
   margin-bottom: 8px;
   font-size: 20px;
 
@@ -127,17 +211,42 @@ const Hr = styled.hr`
   right: 20px;
 `;
 
-export default function Header() {
+const HrLeft = styled.hr`
+  border: none;
+  color: black;
+  height: 2px;
+  width: 80%;
+  margin: 20px 0px 10px 0px;
+  background: black;
+  left: 0px;
+`;
+
+export default function Header({ user, loading }) {
   const [menuOn, setMenuOn] = useState(true);
+  const [menuLeftOn, setMenuLeftOn] = useState(true);
 
   return (
     <HeaderStyled>
       <div></div>
-      <LoginImg src="/LoginFace.png" alt="Login Symbol" />
+      {/* show dummy if user is not logged in */}
+      {!loading &&
+        (user ? (
+          <LoginImg
+            src={user.picture}
+            alt="user picture"
+            onClick={() => setMenuLeftOn(!menuLeftOn)}
+          />
+        ) : (
+          <LoginImg
+            src="/LoginFace.png"
+            alt="user symbol"
+            onClick={() => setMenuLeftOn(!menuLeftOn)}
+          />
+        ))}
       <Link href="/">
         <LogoImg src="/BlackHandyPrayBG.png" alt="PrayNow Logo" />
       </Link>
-      <p>{console.log(menuOn)}</p>
+      <p></p>
       <HamburgerButton onClick={() => setMenuOn(!menuOn)}>
         <HamburgerContent className={menuOn ? '' : 'hidden'}>
           <div></div>
@@ -149,42 +258,119 @@ export default function Header() {
           X
         </HamburgerContent>
       </HamburgerButton>
-
       <Nav className={menuOn ? 'hidden' : ''}>
         <ul>
           <li>
             <Link href="/">
-              <NoDeco title="Home">Home</NoDeco>
+              <NoDeco title="Home" onClick={() => setMenuOn(!menuOn)} s>
+                Home
+              </NoDeco>
             </Link>
           </li>
           <li>
-            <Link href="/login">
-              <NoDeco title="Login">Login</NoDeco>
-            </Link>
+            {!loading &&
+              (user ? (
+                <Link href="../api/logout">
+                  <NoDeco title="Logout" onClick={() => setMenuOn(!menuOn)}>
+                    Logout
+                  </NoDeco>
+                </Link>
+              ) : (
+                <Link href="../api/login">
+                  <NoDeco title="Login" onClick={() => setMenuOn(!menuOn)}>
+                    Login
+                  </NoDeco>
+                </Link>
+              ))}
           </li>
+          <Hr />
           <li>
             <Link href="/pray">
-              <NoDeco title="Pray-Requests">PrayRequests</NoDeco>
+              <NoDeco title="Pray-Requests" onClick={() => setMenuOn(!menuOn)}>
+                Pray Requests
+              </NoDeco>
             </Link>
           </li>
           <li>
             <Link href="/">
-              <NoDeco title="You Prayed">You Prayed</NoDeco>
+              <NoDeco title="You Prayed for" onClick={() => setMenuOn(!menuOn)}>
+                You Prayed for
+              </NoDeco>
             </Link>
           </li>
           <Hr />
           <li>
             <Link href="/">
-              <NoDeco title="Options">Options</NoDeco>
+              <NoDeco title="Options" onClick={() => setMenuOn(!menuOn)}>
+                Options
+              </NoDeco>
             </Link>
           </li>
           <li>
             <Link href="/">
-              <NoDeco title="Other">Other</NoDeco>
+              <NoDeco title="Other" onClick={() => setMenuOn(!menuOn)}>
+                Other
+              </NoDeco>
             </Link>
           </li>
         </ul>
       </Nav>
+
+      {!loading &&
+        (user ? (
+          <NavLeft className={menuLeftOn ? 'hidden' : ''}>
+            <ul>
+              <li>
+                <Link href="../api/logout">
+                  <NoDecoLeft
+                    title="Logout"
+                    onClick={() => setMenuLeftOn(!menuLeftOn)}
+                  >
+                    Logout
+                  </NoDecoLeft>
+                </Link>
+              </li>
+              <HrLeft />
+
+              <li>
+                <Link href="/pray">
+                  <NoDecoLeft
+                    title="Create Pray Request"
+                    onClick={() => setMenuLeftOn(!menuLeftOn)}
+                  >
+                    Create Pray Request
+                  </NoDecoLeft>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/">
+                  <NoDecoLeft
+                    title="See Prayed for You"
+                    onClick={() => setMenuLeftOn(!menuLeftOn)}
+                  >
+                    See who Prayed for You
+                  </NoDecoLeft>
+                </Link>
+              </li>
+            </ul>
+          </NavLeft>
+        ) : (
+          <NavLeftLogin className={menuLeftOn ? 'hidden' : ''}>
+            <ul>
+              <li>
+                <Link href="../api/login">
+                  <NoDecoLeft
+                    title="Login"
+                    onClick={() => setMenuLeftOn(!menuLeftOn)}
+                  >
+                    Login
+                  </NoDecoLeft>
+                </Link>
+              </li>
+            </ul>
+          </NavLeftLogin>
+        ))}
 
       {/* <button>
         <HamburgerImg src="/Hamburger.png" alt="Hamburger Menu Logo" />

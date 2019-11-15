@@ -4,34 +4,41 @@ import gql from 'graphql-tag';
 import ErrorMessage from './ErrorMessage';
 import styled from 'styled-components';
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: auto 1fr 1fr;
-  grid-template-rows: 40px 40px 100px 100px auto;
+  grid-template-rows: 40px 40px auto 100px auto;
   grid-gap: 5px;
   border: 3px solid black;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+
   background: white;
 `;
 
-const GridItemMeta = styled.div`
+const GridItemDate = styled.div`
   justify-self: center;
   align-self: center;
   background: white;
   grid-area: 1 / 1 / 2 / 2;
   border-bottom: 3px solid black;
-  padding: 0 5px 5px 5px;
+  border-right: 3px solid black;
+  padding: 0 10px 5px 5px;
   border-radius: 0px 0px 5px 0px;
 `;
 
 const GridItemCat = styled.div`
-  justify-self: right;
+  justify-self: center;
   align-self: center;
   background: white;
+  width: 100%;
+  text-align: center;
   grid-area: 1 / 3 / 2 / 4;
   border-bottom: 3px solid black;
-  padding: 0 15px 5px 25px;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  padding: 0 0 5px 0px;
   border-radius: 0px 0px 0px 5px;
 `;
 
@@ -73,17 +80,57 @@ const GridItemAuthor = styled.div`
   align-self: stretch;
   background: white;
   grid-area: 5 / 3 / 6 / 4;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  padding: 5px 10px 5px 5px;
+  text-align: center;
+  border-radius: 5px 0px 0px 0px;
+  background: #ffe100;
+`;
+
+const GridItemPrayButton = styled.div`
+  justify-self: center;
+  align-self: center;
+  background: white;
+  grid-area: 5 / 2 / 6 / 3;
+  text-align: center;
+  display: flex;
+  margin-right: 10px;
+`;
+
+const GridItemButton = styled.button`
+  padding: 7px 15px 5px 17px;
+  margin-left: 5px;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  background: #fff6a5;
+
+  :hover {
+    background: #ffe100;
+    transition: all 0.4s ease 0s;
+  }
 `;
 
 const GridItemPrays = styled.div`
   justify-self: stretch;
-  align-self: stretch;
+  padding-left: 3px;
+  align-self: center;
   background: white;
-  grid-area: 5 / 1 / 6 / 3;
+  border: none;
+  grid-area: 5 / 1 / 6 / 2;
 
   .hidden {
     display: none;
   }
+`;
+
+const NoDeco = styled.a`
+  text-decoration: none;
 `;
 
 const ImgRound = styled.img`
@@ -113,14 +160,12 @@ export const ONE_USERACCOUNT_QUERY = gql`
   }
 `;
 
-export const prayRequestsQueryVars = {
-  skip: 0,
-  first: 2
-};
+// export const prayRequestsQueryVars = {
+//   skip: 0,
+//   first: 2
+// };
 
 export default function OneUserDetail({ userScreenName }) {
-  console.log(userScreenName);
-
   const [hiddenOn, setHiddenOn] = useState(null);
   const { loading, error, data, fetchMore, networkStatus } = useQuery(
     ONE_USERACCOUNT_QUERY,
@@ -173,16 +218,61 @@ export default function OneUserDetail({ userScreenName }) {
       <div>{userAccount.userScreenName}</div>
       <div>User since: {date}</div>
       <ImgRound src={userAccount.userProfileImageUrl} />
-
       <br />
-      {/* {areMorePrayRequests && (
-        <button
-          onClick={() => loadMorePrayRequests()}
-          disabled={loadingMorePrayRequests}
-        >
-          {loadingMorePrayRequests ? 'Loading...' : 'Show More'}
-        </button>
-      )} */}
+      <br />
+      <GridContainer>
+        <GridItemDate></GridItemDate>
+        <GridItemCat>
+          {/* {userAccount.prayRequestCategories[0].categoryName} */}
+        </GridItemCat>
+        <GridItemTitle>
+          {userAccount.prayRequest.prayRequestTitel}
+        </GridItemTitle>
+        <GridItemImg>
+          <Img
+            src={userAccount.prayRequest.prayRequestImageUrl}
+            // width="170px"
+            // height="100px"
+          />
+        </GridItemImg>
+
+        <GridItemText>{userAccount.prayRequest.prayRequestText}</GridItemText>
+        <GridItemAuthor>
+          {/* <Link href={'/users/' + userAccount.prays.userScreenName}>
+            <NoDeco>PR: {userAccount.prays.userScreenName}</NoDeco>
+          </Link> */}
+        </GridItemAuthor>
+
+        <GridItemPrayButton>
+          <img src="/BlackHandyPrayBG.png" alt="PrayNow Logo" height="22px" />
+          <GridItemButton>Pray</GridItemButton>
+        </GridItemPrayButton>
+
+        <GridItemPrays>
+          {/* Prays: {userAccount.prays.length + ' '}
+          <button
+            className={hiddenOn === userAccount.id ? 'hidden' : ''}
+            onClick={() => setHiddenOn(userAccount.id)}
+          >
+            ▼
+          </button>
+          <button
+            className={hiddenOn === userAccount.id ? '' : 'hidden'}
+            onClick={() => setHiddenOn(false)}
+          >
+            ▲
+          </button>
+          <div className={hiddenOn === userAccount.id ? '' : 'hidden'}>
+            {userAccount.prays.map((pray, index) => (
+              <div key={index}>
+                <Link href={'/users/' + pray.userAccount.userScreenName}>
+                  <NoDeco>{pray.userAccount.userScreenName}</NoDeco>
+                </Link>
+              </div>
+            ))}
+          </div> */}
+        </GridItemPrays>
+      </GridContainer>
     </section>
   );
 }

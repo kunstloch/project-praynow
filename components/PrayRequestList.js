@@ -233,7 +233,7 @@ export default function PrayRequestList() {
 
             <GridItemText>{post.prayRequestText}</GridItemText>
             <GridItemAuthor>
-              <Link href={'/user/' + post.userAccount.userScreenName}>
+              <Link href={'/users/' + post.userAccount.userScreenName}>
                 <NoDeco>PR: {post.userAccount.userScreenName}</NoDeco>
               </Link>
             </GridItemAuthor>
@@ -264,7 +264,7 @@ export default function PrayRequestList() {
               <div className={hiddenOn === post.id ? '' : 'hidden'}>
                 {post.prays.map((pray, index) => (
                   <div key={index}>
-                    <Link href={'/user/' + pray.userAccount.userScreenName}>
+                    <Link href={'/users/' + pray.userAccount.userScreenName}>
                       <NoDeco>{pray.userAccount.userScreenName}</NoDeco>
                     </Link>
                   </div>

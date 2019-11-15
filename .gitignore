@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+# like in the Auth0-Next.js example
+.env
+.next
+now.json
+
+
 # testing
 /coverage
 

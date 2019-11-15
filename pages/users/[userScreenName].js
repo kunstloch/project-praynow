@@ -73,16 +73,18 @@ const GridItem4 = styled.div`
   grid-area: 4 / 1 / 4 / 4;
 `;
 
-const OneUser = props => {
+const OneUser = userScreenName => {
   return (
     <>
       <MainBox>
         <MainH>User Data</MainH>
       </MainBox>
       <br />
-      <h2>One User-Data Test</h2>
+      {/* {console.log('Props: ', props)} */}
+      {console.log('Query: ', userScreenName)}
+      <h2>Details about - {userScreenName.userScreenName} </h2>
       <br />
-      <OneUserDetail userScreenName={props.userScreenName} />
+      <OneUserDetail userScreenName={userScreenName.userScreenName} />
     </>
   );
 };
@@ -90,6 +92,5 @@ const OneUser = props => {
 export default withApollo(OneUser);
 
 OneUser.getInitialProps = async ({ query: { userScreenName } }) => {
-  console.log('Q: ', userScreenName);
   return { userScreenName };
 };

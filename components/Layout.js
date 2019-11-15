@@ -41,22 +41,25 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-const Layout = props => (
-  <>
-    <Head>
-      <title>PrayNow</title>
-      <link rel="icon" href="/favicon.ico" />
-      <link
-        href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap"
-        rel="stylesheet"
-      ></link>
-    </Head>
-    <GlobalStyle />
-    <Header />
+function Layout({ user, loading = false, children }) {
+  return (
+    <>
+      <Head>
+        <title>PrayNow</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap"
+          rel="stylesheet"
+        ></link>
+        <link href="AugsburgerSchriftCAT.ttf" rel="stylesheet"></link>
+      </Head>
+      <GlobalStyle />
+      <Header user={user} loading={loading} />
 
-    {props.children}
-    {/* <Footer /> */}
-  </>
-);
+      {children}
+      {/* <Footer /> */}
+    </>
+  );
+}
 
 export default Layout;
