@@ -121,7 +121,7 @@ const NavLeft = styled.nav`
   position: fixed;
   top: 110px;
   left: 0;
-  height: 40%;
+  height: 50%;
   width: 30%;
 
   bottom: 0;
@@ -333,7 +333,7 @@ export default function Header({ user, loading }) {
               <HrLeft />
 
               <li>
-                <Link href="/pray">
+                <Link href="/prayrequest">
                   <NoDecoLeft
                     title="Create Pray Request"
                     onClick={() => setMenuLeftOn(!menuLeftOn)}

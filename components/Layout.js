@@ -51,6 +51,7 @@ function Layout({ user, loading = false, children }) {
           href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap"
           rel="stylesheet"
         ></link>
+
         <link href="AugsburgerSchriftCAT.ttf" rel="stylesheet"></link>
       </Head>
       <GlobalStyle />

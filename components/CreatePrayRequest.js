@@ -1,6 +1,19 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
+import styled from 'styled-components';
+import Link from 'next/link';
+
+const Input = styled.input`
+  background-color: white;
+`;
+
+const Form = styled.form`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+`;
 
 const CREATE_PRAYREQUEST = gql`
   mutation createPrayRequest(
@@ -27,49 +40,44 @@ const CREATE_PRAYREQUEST = gql`
   }
 `;
 
-const GET_POSTS = gql`
-  query allPosts($first: Int!, $skip: Int!) {
-    allPosts(orderBy: createdAt_DESC, first: $first, skip: $skip) {
-      id
-      prayRequestTitel
-      votes
-      prayRequestText
-      createdAt
-      prayRequestImageUrl
-    }
-  }
-`;
+//  After creating PrayRequest -> show PrayRequest list
 
-export default function Submit() {
+// const GET_POSTS = gql`
+//   query allPosts($first: Int!, $skip: Int!) {
+//     allPosts(orderBy: createdAt_DESC, first: $first, skip: $skip) {
+//       id
+//       prayRequestTitel
+//       votes
+//       prayRequestText
+//       createdAt
+//       prayRequestImageUrl
+//     }
+//   }
+// `;
+
+export default function CreatePrayRequest(user = { user }) {
   const [prayRequestTitel, setPrayRequestTitel] = useState('');
   const [prayRequestText, setPrayRequestText] = useState('');
   const [userScreenName, setUserScreenName] = useState('');
-  const [id, setID] = useState('');
+  const [id, setId] = useState('ck2ersd0hg3qi0b71cd4khxof');
   const [prayRequestImageUrl, setPrayRequestImageUrl] = useState('');
 
-  const [createPrayRequest, { error, data }] = useMutation(CREATE_PRAYREQUEST, {
-    variables: {
-      prayRequestTitel,
-      prayRequestText: prayRequestText,
-      userScreenName,
-      id,
-      prayRequestImageUrl
-    },
-    update: (proxy, mutationResult) => {
-      const { allPosts } = proxy.readQuery({
-        query: GET_POSTS,
-        variables: { first: 10, skip: 0 }
-      });
-      const newPost = mutationResult.data.createPrayRequest;
-      proxy.writeQuery({
-        query: GET_POSTS,
-        variables: { first: 10, skip: 0 },
-        data: {
-          allPosts: [newPost, ...allPosts]
-        }
-      });
-    }
-  });
+  const [createPrayRequest, { error, data }] = useMutation(CREATE_PRAYREQUEST);
+
+  // update: (proxy, mutationResult) => {
+  //   const { allPosts } = proxy.readQuery({
+  //     query: GET_POSTS,
+  //     variables: { first: 10, skip: 0 }
+  //   });
+  //   const newPost = mutationResult.data.createPrayRequest;
+  //   proxy.writeQuery({
+  //     query: GET_POSTS,
+  //     variables: { first: 10, skip: 0 },
+  //     data: {
+  //       allPosts: [newPost, ...allPosts]
+  //     }
+  //   });
+  // }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -84,22 +92,48 @@ export default function Submit() {
       return false;
     }
 
-    createPrayRequest();
+    createPrayRequest({
+      variables: {
+        prayRequestTitel,
+        prayRequestText: prayRequestText,
+        userScreenName,
+        id,
+        prayRequestImageUrl
+      }
+      
+    });
 
     // reset form
     e.target.elements.prayRequestTitel.value = '';
     e.target.elements.prayRequestText.value = '';
     e.target.elements.userScreenName.value = '';
-    e.target.elements.id.value = '';
+    e.target.elements.id.value = 'ck2ersd0hg3qi0b71cd4khxof';
     e.target.elements.prayRequestImageUrl.value = '';
+
+    alert('Thank you for the Pray Request! We pray for you. ');
+
+    function afterPrayRequest() {
+      return (
+        <>
+          <div>
+            Thank you for the Pray Request! We pray for you.
+            <p>
+              Find your Pray Request here:
+              <Link href="/pray">
+                <a>Pray Request List</a>
+              </Link>
+            </p>
+          </div>
+        </>
+      );
+    }
   }
 
   // prepend http if missing from prayRequestText
-  const pattern = /^((http|https):\/\/)/;
+  // const pattern = /^((http|https):\/\/)/;
 
   return (
     <Form onSubmit={handleSubmit}>
-      <H1>Submit</H1>
       <Input
         placeholder="prayRequestTitel"
         name="prayRequestTitel"
@@ -111,7 +145,6 @@ export default function Submit() {
         name="userScreenName"
         onChange={e => setUserScreenName(e.target.value)}
       />
-
       <select name="id" onChange={e => setId(e.target.value)}>
         <option value="ck2ersd0hg3qi0b71cd4khxof">Animals</option>
         <option value="ck2ert0bllfvv0b49gi2yc1vd">Pubilc</option>
@@ -125,26 +158,20 @@ export default function Submit() {
         <option value="ck2hbg3hc81ko0b49t25if5fa">School</option>
         <option value="ck2hbgqlf5lrm0b71js98w60t">Exams</option>
       </select>
-
       <Input
         placeholder="prayRequestImageUrl"
         name="prayRequestImageUrl"
         onChange={e => setPrayRequestImageUrl(e.target.value)}
       />
-
-      <Input
+      <textarea
         placeholder="prayRequestText"
         name="prayRequestText"
-        onChange={e =>
-          setprayRequestText(
-            !pattern.test(e.target.value)
-              ? `https://${e.target.value}`
-              : e.target.value
-          )
-        }
+        rows="10"
+        cols="20"
+        onChange={e => setPrayRequestText(e.target.value)}
       />
-
       <button type="submit">Submit</button>
+      <div>{console.log('User: ', user)}</div>
     </Form>
   );
 }
