@@ -38,7 +38,7 @@ export default function CreateUser(props) {
     {
       variables: {
         userName: props.user.name,
-        userScreenName: props.user.nickname,
+        userScreenName: props.user.given_name + props.user.family_name,
         userProfileImageUrl: props.user.picture,
         auth0Sub: props.user.sub
       }
@@ -59,7 +59,7 @@ export default function CreateUser(props) {
   createUserAccount({
     variables: {
       userName: props.user.name,
-      userScreenName: props.user.nickname,
+      userScreenName: props.user.given_name + props.user.family_name,
       userProfileImageUrl: props.user.picture,
       auth0Sub: props.user.sub
     }

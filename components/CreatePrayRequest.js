@@ -58,8 +58,8 @@ const CREATE_PRAYREQUEST = gql`
 export default function CreatePrayRequest(user = { user }) {
   const [prayRequestTitel, setPrayRequestTitel] = useState('');
   const [prayRequestText, setPrayRequestText] = useState('');
-  const userScreenName = user.user.nickname;
-  // console.log('DAS IST ER DOCH', user.user.nickname);
+  const userScreenName = user.user.given_name + user.user.family_name;
+  console.log('DAS IST ER DOCH', userScreenName);
   const [id, setId] = useState('ck2ersd0hg3qi0b71cd4khxof');
   const [prayRequestImageUrl, setPrayRequestImageUrl] = useState('');
 
