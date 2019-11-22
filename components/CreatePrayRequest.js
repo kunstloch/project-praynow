@@ -21,7 +21,7 @@ const CREATE_PRAYREQUEST = gql`
     $prayRequestText: String!
     $userScreenName: String!
     $id: ID!
-    $prayRequestImageUrl: String!
+    $prayRequestImageUrl: String
   ) {
     createPrayRequest(
       data: {
@@ -82,12 +82,7 @@ export default function CreatePrayRequest(user = { user }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (
-      prayRequestTitel === '' ||
-      prayRequestText === '' ||
-      id === '' ||
-      prayRequestImageUrl === ''
-    ) {
+    if (prayRequestTitel === '' || prayRequestText === '' || id === '') {
       window.alert('All fields are required.');
       return false;
     }
