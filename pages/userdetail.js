@@ -3,6 +3,7 @@ import CreateUser from '../components/CreateUser';
 import Link from 'next/link';
 import { withApollo } from '../lib/apollo';
 import styled from 'styled-components';
+import CheckUser from '../components/CreateUser';
 
 // TEST TEST TEST
 // import auth0 from '../lib/auth0';
@@ -58,7 +59,7 @@ function UserDetail({ user, loading }) {
             <h2>Create Pray Request</h2>
 
             <div>
-              <CreateUser auth0Sub={user.sub} />
+              <CheckUser auth0Sub={user.sub} user={user} />
             </div>
             <div>{console.log('User Create User: ', user)}</div>
           </>

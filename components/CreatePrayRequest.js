@@ -28,13 +28,13 @@ const CREATE_PRAYREQUEST = gql`
         prayRequestTitel: $prayRequestTitel
         prayRequestText: $prayRequestText
         prayRequestImageUrl: $prayRequestImageUrl
+        status: PUBLISHED
         userAccount: { connect: { userScreenName: $userScreenName } }
         prayRequestCategories: { connect: { id: $id } }
       }
     ) {
       id
       createdAt
-      status
       updatedAt
     }
   }
@@ -58,7 +58,8 @@ const CREATE_PRAYREQUEST = gql`
 export default function CreatePrayRequest(user = { user }) {
   const [prayRequestTitel, setPrayRequestTitel] = useState('');
   const [prayRequestText, setPrayRequestText] = useState('');
-  const [userScreenName, setUserScreenName] = useState('');
+  const userScreenName = user.user.nickname;
+  // console.log('DAS IST ER DOCH', user.user.nickname);
   const [id, setId] = useState('ck2ersd0hg3qi0b71cd4khxof');
   const [prayRequestImageUrl, setPrayRequestImageUrl] = useState('');
 
@@ -84,7 +85,6 @@ export default function CreatePrayRequest(user = { user }) {
     if (
       prayRequestTitel === '' ||
       prayRequestText === '' ||
-      userScreenName === '' ||
       id === '' ||
       prayRequestImageUrl === ''
     ) {
@@ -94,19 +94,18 @@ export default function CreatePrayRequest(user = { user }) {
 
     createPrayRequest({
       variables: {
-        prayRequestTitel,
+        prayRequestTitel: prayRequestTitel,
         prayRequestText: prayRequestText,
-        userScreenName,
+        userScreenName: userScreenName,
         id,
         prayRequestImageUrl
       }
-      
     });
 
     // reset form
     e.target.elements.prayRequestTitel.value = '';
     e.target.elements.prayRequestText.value = '';
-    e.target.elements.userScreenName.value = '';
+    // e.target.elements.userScreenName.value = '';
     e.target.elements.id.value = 'ck2ersd0hg3qi0b71cd4khxof';
     e.target.elements.prayRequestImageUrl.value = '';
 
@@ -140,11 +139,11 @@ export default function CreatePrayRequest(user = { user }) {
         onChange={e => setPrayRequestTitel(e.target.value)}
       />
 
-      <Input
+      {/* <Input
         placeholder="userScreenName"
         name="userScreenName"
         onChange={e => setUserScreenName(e.target.value)}
-      />
+      /> */}
       <select name="id" onChange={e => setId(e.target.value)}>
         <option value="ck2ersd0hg3qi0b71cd4khxof">Animals</option>
         <option value="ck2ert0bllfvv0b49gi2yc1vd">Pubilc</option>
