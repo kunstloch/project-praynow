@@ -17,8 +17,16 @@ const GridContainer = styled.div`
   background: white;
 `;
 
-const ButtonShowMore = styled.div`
+const ButtonShowMore = styled.button`
   padding: 20px;
+  border: 3px solid black;
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 const GridItemDate = styled.div`
