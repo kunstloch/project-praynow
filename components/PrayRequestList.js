@@ -17,6 +17,10 @@ const GridContainer = styled.div`
   background: white;
 `;
 
+const ButtonShowMore = styled.div`
+  padding: 20px;
+`;
+
 const GridItemDate = styled.div`
   justify-self: center;
   align-self: center;
@@ -276,12 +280,12 @@ export default function PrayRequestList() {
       })}
 
       {areMorePrayRequests && (
-        <button
+        <ButtonShowMore
           onClick={() => loadMorePrayRequests()}
           disabled={loadingMorePrayRequests}
         >
           {loadingMorePrayRequests ? 'Loading...' : 'Show More'}
-        </button>
+        </ButtonShowMore>
       )}
     </section>
   );
