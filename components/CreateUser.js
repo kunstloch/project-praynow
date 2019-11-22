@@ -178,17 +178,14 @@ export default function CreateUser({ auth0Sub }) {
   const { loading, error, data } = useQuery(CHECK_SUB_QUERY, {
     variables: { auth0Sub: auth0Sub }
   });
-  const [createUserAccount, { error, data }] = useMutation(
-    CREATE_USERACCOUNT_QUERY,
-    {
-      variables: {
-        userName: user.name,
-        userScreenName: user.nickname,
-        userProfileImageUrl: user.picture,
-        auth0Sub: user.sub
-      }
+  const [createUserAccount, { data }] = useMutation(CREATE_USERACCOUNT_QUERY, {
+    variables: {
+      userName: user.name,
+      userScreenName: user.nickname,
+      userProfileImageUrl: user.picture,
+      auth0Sub: user.sub
     }
-  );
+  });
 
   if (error) return;
   <>
