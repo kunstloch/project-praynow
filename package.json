@@ -8,6 +8,9 @@
     "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build"
   },
+  "engines": {
+    "node": "12.9.0"
+  },
   "dependencies": {
     "@apollo/react-hooks": "3.0.0",
     "@apollo/react-ssr": "3.0.0",
