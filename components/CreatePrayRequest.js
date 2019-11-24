@@ -141,7 +141,7 @@ export default function CreatePrayRequest(user = { user }) {
       /> */}
       <select name="id" onChange={e => setId(e.target.value)}>
         <option value="ck2ersd0hg3qi0b71cd4khxof">Animals</option>
-        <option value="ck2ert0bllfvv0b49gi2yc1vd">Pubilc</option>
+        <option value="ck2ert0bllfvv0b49gi2yc1vd">Public</option>
         <option value="ck2ertcrilfze0b49gcjg848t">Personal</option>
         <option value="ck2ertirclg190b49qcbsf287">Family</option>
         <option value="ck2erunl5lgie0b49ojco5oxv">Relationship</option>
