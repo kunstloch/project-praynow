@@ -59,12 +59,12 @@ function Home({ user, loading }) {
             <div>
               <WhiteBorder>
                 <Link href="pray">
-                  <LinkLogin>New Pray-Requests</LinkLogin>
+                  <LinkLogin>Pray Request List</LinkLogin>
                 </Link>
               </WhiteBorder>
               <WhiteBorder>
-                <Link href="pray">
-                  <LinkLogin>Your Pray Requests</LinkLogin>
+                <Link href="/prayrequest">
+                  <LinkLogin>Create Pray Request</LinkLogin>
                 </Link>
               </WhiteBorder>
               <WhiteBorder>
@@ -81,14 +81,14 @@ function Home({ user, loading }) {
             <div>
               <WhiteBorder>
                 <Link href="api/login">
-                  <LinkLogin>Login</LinkLogin>
+                  <LinkLogin>Login / Sign Up</LinkLogin>
                 </Link>
               </WhiteBorder>
-              <WhiteBorder>
+              {/* <WhiteBorder>
                 <Link href="api/signup">
                   <LinkLogin>Sign-Up</LinkLogin>
                 </Link>
-              </WhiteBorder>
+              </WhiteBorder> */}
             </div>
           </>
         ))}

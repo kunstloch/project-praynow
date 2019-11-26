@@ -6,22 +6,25 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useMutation } from '@apollo/react-hooks';
+import Router from 'next/router';
 
-export const CREATE_USERACCOUNT_QUERY = gql`
-  mutation createUserAccount(
+export const UPSERT_USERACCOUNT_QUERY = gql`
+  mutation upsertUserAccount(
     $userName: String!
     $userScreenName: String!
     $userProfileImageUrl: String!
     $auth0Sub: String!
   ) {
-    createUserAccount(
-      data: {
+    upsertUserAccount(
+      where: { auth0Sub: $auth0Sub }
+      create: {
         userName: $userName
         userScreenName: $userScreenName
         userProfileImageUrl: $userProfileImageUrl
         auth0Sub: $auth0Sub
         status: PUBLISHED
       }
+      update: { userProfileImageUrl: $userProfileImageUrl }
     ) {
       id
       createdAt
@@ -33,8 +36,8 @@ export const CREATE_USERACCOUNT_QUERY = gql`
 export default function CreateUser(props) {
   const [hiddenOn, setHiddenOn] = useState(null);
   console.log('props are here: ', props.user.name);
-  const [createUserAccount, { error, data, user, loading }] = useMutation(
-    CREATE_USERACCOUNT_QUERY,
+  const [upsertUserAccount, { error, data, user, loading }] = useMutation(
+    UPSERT_USERACCOUNT_QUERY,
     {
       variables: {
         userName: props.user.name,
@@ -47,7 +50,7 @@ export default function CreateUser(props) {
 
   if (error) return;
   <>
-    <ErrorMessage message="Error loading posts." />
+    <ErrorMessage message="Error loading" />
   </>;
 
   if (loading) return <div>Loading</div>;
@@ -56,7 +59,7 @@ export default function CreateUser(props) {
   // const areMorePrayRequests =
   //   prayRequests.length < prayRequestsConnection.aggregate.count;
 
-  createUserAccount({
+  upsertUserAccount({
     variables: {
       userName: props.user.name,
       userScreenName: props.user.given_name + props.user.family_name,
@@ -72,6 +75,7 @@ export default function CreateUser(props) {
       <section>
         <br />
       </section>
+      {Router.push('/')}
     </>
   );
 }

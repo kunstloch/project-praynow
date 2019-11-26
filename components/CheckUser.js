@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useMutation } from '@apollo/react-hooks';
 import CreateUser from './CreateUser';
+import Router from 'next/router';
 
 const GridContainer = styled.div`
   display: grid;
@@ -142,7 +143,7 @@ const ImgRound = styled.img`
 `;
 
 export const CHECK_SUB_QUERY = gql`
-  query CheckSub($auth0Sub: String!) {
+  query checkSub($auth0Sub: String!) {
     userAccount(where: { auth0Sub: $auth0Sub }) {
       userScreenName
       createdAt
@@ -154,13 +155,26 @@ export const CHECK_SUB_QUERY = gql`
 
 export default function CheckUser({ auth0Sub, user }) {
   const [hiddenOn, setHiddenOn] = useState(null);
-  const { loading, error, data } = useQuery(CHECK_SUB_QUERY, {
-    variables: { auth0Sub: auth0Sub }
-  });
+  console.log('CheckUser auth0Sub: ', auth0Sub);
+  console.log('CheckUser user: ', user);
+
+  // ********** OLD ************
+  // const { loading, error, data } = useQuery(CHECK_SUB_QUERY, {
+  //   variables: { auth0Sub: auth0Sub }
+  // });
+
+  // *********** NEW ***********
+
+  const [checkSub, { loading, error, data, auth0Sub, user }] = useQuery(
+    CHECK_SUB_QUERY,
+    {
+      variables: { auth0Sub: auth0Sub }
+    }
+  );
 
   if (error) return;
   <>
-    <ErrorMessage message="Error loading posts." />
+    <ErrorMessage message="Error loading" />
   </>;
 
   if (loading) return <div>Loading</div>;
@@ -168,20 +182,22 @@ export default function CheckUser({ auth0Sub, user }) {
   const { userAccount: userAccount } = data;
   // const areMorePrayRequests =
   //   prayRequests.length < prayRequestsConnection.aggregate.count;
-
+  checkSub({ variables: { auth0Sub: auth0Sub } });
   return (
     <>
-      {!userAccount ? (
+      {userAccount == null || !userAccount ? (
         <>
-          <div>THIS SHOULD START A USER MANIPULATION QUERY!</div>
+          {/* <div>THIS SHOULD START A USER MANIPULATION QUERY!</div>
           <div>STILL WORK ON THIS</div>
-          {console.log('This is User from CheckUser', user)}
+          {console.log('This is User from CheckUser', user)} */}
           <CreateUser user={user} />
+          {Router.push('/')}
         </>
       ) : (
         <>
           <div>JUUUUHHHUUU!</div>
           <div>USER IS HERE</div>
+          {Router.push('/')}
         </>
       )}
 
@@ -191,6 +207,7 @@ export default function CheckUser({ auth0Sub, user }) {
         <br />
         <GridContainer>TEST</GridContainer>
       </section>
+      {Router.push('/')}
     </>
   );
 }
