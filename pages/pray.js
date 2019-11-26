@@ -14,6 +14,7 @@ const WhiteBorder = styled.p`
 
 const LinkLogin = styled.a`
   text-decoration: none;
+  cursor: pointer;
 `;
 
 const MainBox = styled.div`

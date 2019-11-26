@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Router from 'next/router';
 
 const Input = styled.input`
   background-color: white;
@@ -105,22 +106,23 @@ export default function CreatePrayRequest(user = { user }) {
     e.target.elements.prayRequestImageUrl.value = '';
 
     alert('Thank you for the Pray Request! We pray for you. ');
+    Router.push('/pray');
 
-    function afterPrayRequest() {
-      return (
-        <>
-          <div>
-            Thank you for the Pray Request! We pray for you.
-            <p>
-              Find your Pray Request here:
-              <Link href="/pray">
-                <a>Pray Request List</a>
-              </Link>
-            </p>
-          </div>
-        </>
-      );
-    }
+    // function afterPrayRequest() {
+    //   return (
+    //     <>
+    //       <div>
+    //         Thank you for the Pray Request! We pray for you.
+    //         <p>
+    //           Find your Pray Request here:
+    //           <Link href="/pray">
+    //             <a>Pray Request List</a>
+    //           </Link>
+    //         </p>
+    //       </div>
+    //     </>
+    //   );
+    // }
   }
 
   // prepend http if missing from prayRequestText

@@ -21,7 +21,7 @@ const LoginImg = styled.img`
   width: 45px;
   left: 5px;
   top: 45px;
-
+  cursor: pointer;
   position: absolute;
   border-radius: 50%;
   border: 2px solid black;
@@ -70,6 +70,7 @@ const HamburgerContent = styled.div`
   background-color: #ffe100;
   font-size: 38px;
   font-weight: bold;
+  cursor: pointer;
 
   &:hover,
   &:focus {
@@ -182,7 +183,7 @@ const NoDeco = styled.a`
   padding: 10px 10px 15px 10px;
   margin-bottom: 8px;
   font-size: 20px;
-
+  cursor: pointer;
   &:hover,
   &:focus {
     font-size: 24px;
@@ -194,7 +195,7 @@ const NoDecoLeft = styled.a`
   padding: 10px 10px 15px 0px;
   margin-bottom: 8px;
   font-size: 20px;
-
+  cursor: pointer;
   &:hover,
   &:focus {
     font-size: 24px;
@@ -307,9 +308,9 @@ export default function Header({ user, loading }) {
             </Link>
           </li>
           <li>
-            <Link href="/">
-              <NoDeco title="Other" onClick={() => setMenuOn(!menuOn)}>
-                Other
+            <Link href="/Imprint">
+              <NoDeco title="Imprint" onClick={() => setMenuOn(!menuOn)}>
+                Legal Notice
               </NoDeco>
             </Link>
           </li>

@@ -5,11 +5,13 @@ import ErrorMessage from './ErrorMessage';
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import CreatePray from './CreatePray';
+import auth0 from '../lib/auth0';
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: auto 1fr 1fr;
-  grid-template-rows: 40px 40px auto 100px auto;
+  grid-template-rows: 40px 40px auto auto auto;
   grid-gap: 5px;
   border: 3px solid black;
   margin-bottom: 30px;
@@ -27,6 +29,7 @@ const ButtonShowMore = styled.button`
   margin-bottom: 20px;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const GridItemDate = styled.div`
@@ -84,6 +87,8 @@ const GridItemText = styled.div`
   align-self: stretch;
   background: white;
   padding-top: 10px;
+  padding-bottom: 15px;
+  margin: 5px;
   grid-area: 3 / 2 / 5 / 3;
 `;
 
@@ -108,6 +113,7 @@ const GridItemPrayButton = styled.div`
   text-align: center;
   display: flex;
   margin-right: 10px;
+  cursor: pointer;
 `;
 
 const GridItemButton = styled.button`
@@ -121,6 +127,7 @@ const GridItemButton = styled.button`
   text-decoration: none;
   font-weight: bold;
   background: #fff6a5;
+  cursor: pointer;
 
   :hover {
     background: #ffe100;
@@ -139,10 +146,15 @@ const GridItemPrays = styled.div`
   .hidden {
     display: none;
   }
+
+  button {
+    cursor: pointer;
+  }
 `;
 
 const NoDeco = styled.a`
   text-decoration: none;
+  cursor: pointer;
 `;
 
 export const ALL_PRAYREQUESTS_QUERY = gql`
@@ -177,7 +189,7 @@ export const ALL_PRAYREQUESTS_QUERY = gql`
 
 export const prayRequestsQueryVars = {
   skip: 0,
-  first: 3
+  first: 5
 };
 
 export default function PrayRequestList() {
@@ -256,6 +268,7 @@ export default function PrayRequestList() {
                 alt="PrayNow Logo"
                 height="22px"
               />
+              {/* onClick={CreatePray(post.id)} */}
               <GridItemButton>Pray</GridItemButton>
             </GridItemPrayButton>
 

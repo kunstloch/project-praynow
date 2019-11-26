@@ -14,6 +14,7 @@ const WhiteBorder = styled.p`
 
 const LinkLogin = styled.a`
   text-decoration: none;
+  cursor: pointer;
 `;
 
 const MainBox = styled.div`
@@ -82,7 +83,9 @@ const OneUser = userScreenName => {
       <br />
       {/* {console.log('Props: ', props)} */}
       {console.log('Query: ', userScreenName)}
-      <h2>Details about - {userScreenName.userScreenName} </h2>
+      <h2>
+        Details about <br /> {userScreenName.userScreenName}{' '}
+      </h2>
       <br />
       <OneUserDetail userScreenName={userScreenName.userScreenName} />
     </>

@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <Layout user={user} loading={loading}>
       <Component {...pageProps} user={user} loading={loading} />
+      {console.log('USER: ', user)}
     </Layout>
   );
 }

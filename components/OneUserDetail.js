@@ -131,6 +131,12 @@ const GridItemPrays = styled.div`
 
 const NoDeco = styled.a`
   text-decoration: none;
+  cursor: pointer;
+`;
+
+const Central = styled.div`
+  text-align: center;
+  margin: 30px 20px 20px 20px;
 `;
 
 const ImgRound = styled.img`
@@ -215,15 +221,19 @@ export default function OneUserDetail({ userScreenName }) {
 
   return (
     <section>
-      <div>{userAccount.userScreenName}</div>
-      <div>User since: {date}</div>
-      <ImgRound src={userAccount.userProfileImageUrl} />
-      <br />
-      <br />
+      <Central>
+        <div>{userAccount.userScreenName}</div>
+        <div>User since: {date}</div>
+        <ImgRound src={userAccount.userProfileImageUrl} />
+        <br />
+        <br />
+      </Central>
+      {/*
+
       <GridContainer>
         <GridItemDate></GridItemDate>
         <GridItemCat>
-          {/* {userAccount.prayRequestCategories[0].categoryName} */}
+          {/* {userAccount.prayRequestCategories[0].categoryName} 
         </GridItemCat>
         <GridItemTitle>
           {userAccount.prayRequest.prayRequestTitel}
@@ -240,7 +250,7 @@ export default function OneUserDetail({ userScreenName }) {
         <GridItemAuthor>
           {/* <Link href={'/users/' + userAccount.prays.userScreenName}>
             <NoDeco>PR: {userAccount.prays.userScreenName}</NoDeco>
-          </Link> */}
+          </Link> 
         </GridItemAuthor>
 
         <GridItemPrayButton>
@@ -270,9 +280,9 @@ export default function OneUserDetail({ userScreenName }) {
                 </Link>
               </div>
             ))}
-          </div> */}
+          </div> 
         </GridItemPrays>
-      </GridContainer>
+      </GridContainer>*/}
     </section>
   );
 }
