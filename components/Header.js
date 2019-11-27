@@ -301,9 +301,9 @@ export default function Header({ user, loading }) {
           </li>
           <Hr />
           <li>
-            <Link href="/">
-              <NoDeco title="Options" onClick={() => setMenuOn(!menuOn)}>
-                Options
+            <Link href="/settings">
+              <NoDeco title="Settings" onClick={() => setMenuOn(!menuOn)}>
+                Settings
               </NoDeco>
             </Link>
           </li>

@@ -324,28 +324,12 @@ export default function CreatePrayRequest(user = { user }) {
 
     alert('Thank you for the Pray Request! We pray for you. ');
     Router.push('/pray');
-
-    // function afterPrayRequest() {
-    //   return (
-    //     <>
-    //       <div>
-    //         Thank you for the Pray Request! We pray for you.
-    //         <p>
-    //           Find your Pray Request here:
-    //           <Link href="/pray">
-    //             <a>Pray Request List</a>
-    //           </Link>
-    //         </p>
-    //       </div>
-    //     </>
-    //   );
-    // }
   }
 
   // prepend http if missing from prayRequestText
   // const pattern = /^((http|https):\/\/)/;
 
-  // *******  cloudinary **********
+  // // *******  cloudinary **********
 
   // uploadFile = async e => {
   //   console.log('Uploading....');
@@ -363,7 +347,7 @@ export default function CreatePrayRequest(user = { user }) {
   //   );
 
   //   const file = await res.json();
-  //   this.setState({ image: file.secure_url });
+  //   setState({ image: file.secure_url });
   // };
 
   return (
@@ -443,10 +427,10 @@ export default function CreatePrayRequest(user = { user }) {
           name="file"
           placeholder="Upload Image"
           required
-          onChange={this.uploadFile}
+          onChange={uploadFile}
         />
-        {this.state.image && (
-          <img width="200" src={this.state.image} alt="Upload Preview" />
+        {state.image && (
+          <img width="200" src={state.image} alt="Upload Preview" />
         )}
       </label> */}
 

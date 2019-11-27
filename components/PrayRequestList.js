@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import CreatePray from './CreatePray';
+import { useMutation } from '@apollo/react-hooks';
+
 import auth0 from '../lib/auth0';
 
 const GridContainer = styled.div`
@@ -157,6 +159,24 @@ const NoDeco = styled.a`
   cursor: pointer;
 `;
 
+// *** CREATE PRAY ***
+// export const CREATE_PRAY = gql`
+//   mutation createPray($auth0Sub: String!, $id: ID!) {
+//     createPray(
+//       data: {
+//         status: PUBLISHED
+//         userAccount: { connect: { auth0Sub: $auth0Sub } }
+//         prayRequest: { connect: { id: $id } }
+//       }
+//     ) {
+//       id
+//       createdAt
+//       updatedAt
+//     }
+//   }
+// `;
+
+// *** CREATE LIST ***
 export const ALL_PRAYREQUESTS_QUERY = gql`
   query prayRequest($first: Int!, $skip: Int!) {
     prayRequests(orderBy: createdAt_DESC, first: $first, skip: $skip) {
@@ -192,7 +212,7 @@ export const prayRequestsQueryVars = {
   first: 5
 };
 
-export default function PrayRequestList() {
+export default function PrayRequestList(props) {
   const [hiddenOn, setHiddenOn] = useState(null);
   const { loading, error, data, fetchMore, networkStatus } = useQuery(
     ALL_PRAYREQUESTS_QUERY,
@@ -204,6 +224,17 @@ export default function PrayRequestList() {
       notifyOnNetworkStatusChange: true
     }
   );
+
+  // // *** CREATE PRAY ***
+  // function createPray(id, sub) {
+  //   const [createPray, { error, data }] = useMutation(CREATE_PRAY);
+  //   createPray({
+  //     variables: {
+  //       auth0Sub: sub,
+  //       id: id
+  //     }
+  //   });
+  // }
 
   const loadingMorePrayRequests = networkStatus === NetworkStatus.fetchMore;
 
@@ -237,6 +268,7 @@ export default function PrayRequestList() {
   return (
     <section>
       <br />
+      {console.log('PROPS in Func: ', props)}
       {prayRequests.map((post, index) => {
         const date = post.createdAt.substring(0, post.createdAt.indexOf('T'));
 
@@ -268,7 +300,7 @@ export default function PrayRequestList() {
                 alt="PrayNow Logo"
                 height="22px"
               />
-              {/* onClick={CreatePray(post.id)} */}
+              {/* onClick={CreatePray(post.id, props.sub)} */}
               <GridItemButton>Pray</GridItemButton>
             </GridItemPrayButton>
 

@@ -77,13 +77,14 @@ const GridItem4 = styled.div`
 const Pray = props => {
   return (
     <>
+      {console.log('PROPS NOW: ', props)}
       <MainBox>
         <MainH>Pray-Requests</MainH>
       </MainBox>
       <br />
       <h2>Newest Pray-Requests</h2>
       <br />
-      <PrayRequestList />
+      <PrayRequestList props={props} />
     </>
   );
 };

@@ -48,7 +48,7 @@ const CREATE_PRAY = gql`
 //   }
 // `;
 
-export default function CreatePray(id) {
+export default function CreatePray(id, sub) {
   const [createPray, { error, data }] = useMutation(CREATE_PRAY);
 
   // update: (proxy, mutationResult) => {
@@ -68,7 +68,7 @@ export default function CreatePray(id) {
 
   createPray({
     variables: {
-      auth0Sub: auth0,
+      auth0Sub: sub,
       id: id
     }
   });
