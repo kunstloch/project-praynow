@@ -308,7 +308,7 @@ export default function Header({ user, loading }) {
             </Link>
           </li>
           <li>
-            <Link href="/Imprint">
+            <Link href="/imprint">
               <NoDeco title="Imprint" onClick={() => setMenuOn(!menuOn)}>
                 Legal Notice
               </NoDeco>
