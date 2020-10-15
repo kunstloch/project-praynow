@@ -12,8 +12,8 @@
     "node": "12.9.0"
   },
   "dependencies": {
-    "@apollo/react-hooks": "3.0.0",
-    "@apollo/react-ssr": "3.0.0",
+    "@apollo/react-hooks": "4.0.0",
+    "@apollo/react-ssr": "4.0.0",
     "@auth0/nextjs-auth0": "0.5.0",
     "apollo-boost": "0.4.4",
     "apollo-cache-inmemory": "1.6.3",
