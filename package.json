@@ -9,7 +9,7 @@
     "heroku-postbuild": "npm run build"
   },
   "engines": {
-    "node": "14.16.1"
+    "node": "18.18.2"
   },
   "dependencies": {
     "@apollo/react-hooks": "4.0.0",
