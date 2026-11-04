@@ -824,10 +824,10 @@ graphql-tag@^2.4.2:
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
   integrity sha512-jApXqWBzNXQ8jYa/HLkZJaVw9jgwNqZkywa2zfFn16Iv1Zb7ELNHkJaXHR7Quvd5SIGsy6Ny7SUKATgnu05uEg==
 
-graphql@15.5.0:
-  version "15.5.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.0.tgz#39d19494dbe69d1ea719915b578bf920344a69d5"
-  integrity sha512-OmaM7y0kaK31NKG31q4YbD2beNYa6jBBKtMFT6gLYJljHLJr42IqJ8KX08u3Li/0ifzTU5HjmoOOrwa5BRLeDA==
+graphql@17.1.0:
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-17.1.0.tgz#8ae1d3ad214fd99d59cb7a67b9c96419701191c8"
+  integrity sha512-JKCOa7rSQNrket/JFhuua86hljUO+IIpyUHfKxlKD6FEfbrLX8jc1FDrA0KPKI+s8OspBCF/5npYccAICHXPpQ==
 
 has-flag@^3.0.0:
   version "3.0.0"
